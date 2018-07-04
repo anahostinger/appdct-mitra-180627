@@ -41,6 +41,8 @@ function set_scrpt_reset(){
     });
     $("#reset-form").submit(function(e){
         e.preventDefault();
+        var ths = $( this );
+        if(ths.attr("in-action") !== undefined) return false;
         var $pswd_lama = $("#password_lama"),
             $pswd_baru = $("#password_baru"),
             $pswd_konfirmasi = $("#password_konfirmasi"),
@@ -55,6 +57,7 @@ function set_scrpt_reset(){
             $pswd_konfirmasi.focus();
             return false;
         }
+        ths.attr("in-action", "true");
         getX({
                 m: "investor-reset_password",
                 id_user: getLS("id_user"),
@@ -70,6 +73,7 @@ function set_scrpt_reset(){
                     alert("Password lama yang anda masukan salah\\nSilahkan coba kembali");
                     $pswd_lama.val("").focus();
                 }
+                ths.removeAttr("in-action");
             });
     });
 }

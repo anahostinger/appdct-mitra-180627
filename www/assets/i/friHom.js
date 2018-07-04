@@ -166,7 +166,7 @@ return '<div class="sidebar bar-block text-theme-dark sidebar-width" id="sidebar
 function nav_open(){
     $("#sidebar").removeClass("animate-left-lost").addClass("animate-left").show();
     $("#overlay-1").removeClass("animate-opacity-lost").addClass("animate-opacity").show();
-    $("html").css("overflow-y","hidden");
+    $("html, body").css("overflow-y","hidden");
 }
 function nav_close(func){
     $("#sidebar").removeClass("animate-left").addClass("animate-left-lost");
@@ -174,7 +174,7 @@ function nav_close(func){
     window.setTimeout(function(){
         $("#sidebar").hide();
         $("#overlay-1").hide();
-        $("html").css("overflow-y","auto");
+        $("html, body").css("overflow-y","auto");
         if(func)
             func();
     }, 290);

@@ -50,6 +50,9 @@ function set_scrpt_profil(){
         $("#profil-form").submit();
     });
     $("#profil-form").submit(function(e){
+        var ths = $( this );
+        if(ths.attr("in-action") !== undefined) return false;
+        
         e.preventDefault();
         var $nama = $("#admin-nama"),
             $alamat = $("#admin-alamat"),
@@ -69,6 +72,7 @@ function set_scrpt_profil(){
         fd.append("data[alamat]", alamat);
         fd.append("data[no_hp]", no_hp);
         fd.append("data[email]", email);
+        ths.attr("in-action", "true");
         getXForm(fd, function(res){ 
             if(res.status == "success"){
                 alert("Perubahan berhasil disimpan");
@@ -80,6 +84,7 @@ function set_scrpt_profil(){
                 alert("No HP telah digunakan oleh user lain, silahkan gunakan no hp yang berbeda");
                 $no_hp.focus();
             }
+            ths.removeAttr("in-action");
         });
     });
 }

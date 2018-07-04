@@ -22,6 +22,8 @@ return '<form class="content center"> '+
 '<scr'+'ipt> '+
 '$("form").submit(function(e){ '+
 '    e.preventDefault(); '+
+'    var ths = $( this ); '+
+'    if(ths.attr("in-action") !== undefined) return false; '+
 '    var ths = $( this ), '+
 '        usr = ths.find("input").eq(0), '+
 '        psw = ths.find("input").eq(1), '+
@@ -29,6 +31,7 @@ return '<form class="content center"> '+
 '        pswd_val = psw.val(); '+
 '    if(!evalDirect(user_val, "No HP harus diisi", usr)) return false; '+
 '    if(!evalDirect(pswd_val, "Password harus diisi", psw)) return false; '+
+'    ths.attr("in-action", "true"); '+
 '    getX({ '+
 '            m: "investor-login", '+
 '            username: user_val, '+
@@ -48,6 +51,7 @@ return '<form class="content center"> '+
 '            }else{ '+
 '                alert("Username/Password tidak cocok"); '+
 '            } '+
+'            ths.removeAttr("in-action"); '+
 '        }); '+
 '}); '+
 '</scr'+'ipt> ';
